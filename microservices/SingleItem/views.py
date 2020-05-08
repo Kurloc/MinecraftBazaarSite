@@ -139,3 +139,34 @@ class OrderObject:
         self.ordersNum = orders_num
         self.amount = sell_or_buy
         self.item_name = item_name
+
+
+def getJsonRespone():
+    x = requests.get('https://api.slothpixel.me/api/skyblock/bazaar')
+    parsed = json.dumps(x.json())
+    jsonLoaded = json.loads(parsed)
+    final_sell_array = []
+    final_buy_array = []
+
+    for item in jsonLoaded:
+        for item2 in jsonLoaded[item]:
+            if item2 == 'sell_summary':
+                type_of_order = 0
+                sell_orders = jsonLoaded[item][item2]
+                for item3 in sell_orders:
+                    print(item3)
+                    final_sell_array.append(OrderObject(amount=item3['amount'],
+                                                        item_name=item,
+                                                        price_per_unit=item3['pricePerUnit'],
+                                                        sell_or_buy=type_of_order,
+                                                        orders_num=item3['orders']))
+            if item2 == 'buy_summary':
+                type_of_order = 1
+                buy_orders = jsonLoaded[item][item2]
+                for item3 in buy_orders:
+                    final_buy_array.append(OrderObject(amount=item3['amount'],
+                                                       item_name=item,
+                                                       price_per_unit=item3['pricePerUnit'],
+                                                       sell_or_buy=type_of_order,
+                                                       orders_num=item3['orders']))
+    return jsonLoaded
