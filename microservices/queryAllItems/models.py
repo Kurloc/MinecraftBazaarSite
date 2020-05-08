@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Create your models here.
+# Create your _models here.
 class BazaarOrders(models.Model):
     amount = models.IntegerField()
     ordersNum = models.IntegerField()
