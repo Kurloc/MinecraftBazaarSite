@@ -3,7 +3,7 @@ import math
 from _models.StdDeviationObject import StdDeviationObject
 
 
-def std_deviation(array: [], weighted_avg, item_name: str) -> {}:
+def std_deviation(array: [], weighted_avg, item_name: str) -> StdDeviationObject:
     total_results = 0
     total_orders = 0
     for item in array:
